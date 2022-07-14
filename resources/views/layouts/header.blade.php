@@ -12,7 +12,7 @@
                 <a href="#" class="nav-link" data-bs-toggle="dropdown">
                     <img class="rounded-circle me-lg-1" src="{{ isset(Auth::user()->photo) ? asset('storage/profile_thumbnails/'.Auth::user()->photo) : asset('user_default.png') }}" alt=""
                          style="width: 30px; height: 30px;">
-                    <span class="d-none d-lg-inline-flex" style="font-size: 13px">{{ Auth::user()->name }}</span>
+                    <span class="d-none d-lg-inline-flex">{{ Auth::user()->name }}</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end bg-secondary border-0 rounded-0 rounded-bottom m-0 shadow">
                     <a href="{{ route('profile') }}" class="dropdown-item">
