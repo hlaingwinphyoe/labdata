@@ -27,11 +27,9 @@ class TestTypeController extends Controller
      */
     public function create()
     {
-        if (auth()->user()->role ==0){
-            $test_types = TestType::orderBy('name','asc')->paginate(10);
-        }else{
-            $test_types = TestType::where('user_id',auth()->id())->orderBy('name','asc')->paginate(10);
-        }
+        $test_types = TestType::when(Auth::user()->role == 1,fn($q)=>$q->where('user_id',Auth::id()))
+            ->orderBy('name','asc')
+            ->paginate(10);
         return view('test_type.create',compact('test_types'));
     }
 

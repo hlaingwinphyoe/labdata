@@ -9,7 +9,7 @@
                     <div class="card-body">
                         <div class="mb-4">
                             <h4 class="text-capitalize fw-bold">
-                                <i class="fa-solid fa-flask-vial me-1 text-primary" style="font-size: 16px !important;"></i>
+                                <i class="fa-solid fa-flask-vial me-1 text-primary" style="font-size: 25px !important;"></i>
                                 Test Types
                             </h4>
                         </div>
@@ -65,7 +65,9 @@
                             <tr>
                                 <th>Test Types</th>
                                 <th>Department</th>
+                                @admin
                                 <th>Creator</th>
+                                @endadmin
                                 <th>Control</th>
                                 <th>Created At</th>
                             </tr>
@@ -75,7 +77,9 @@
                                 <tr class="align-middle">
                                     <td class="text-nowrap">{{ $test_type->name }}</td>
                                     <td>{{ $test_type->department->name }}</td>
+                                    @admin
                                     <td class="text-nowrap">{{ $test_type->user->name }}</td>
+                                    @endadmin
                                     <td>
                                         <form action="{{ route('test_type.destroy',$test_type->id) }}" id="delForm{{ $test_type->id }}" method="post">
                                             @csrf

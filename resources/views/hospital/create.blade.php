@@ -9,7 +9,7 @@
                     <div class="card-body">
                         <div class="mb-4">
                             <h4 class="text-capitalize fw-bold">
-                                <i class="fa-regular fa-hospital-alt me-1 text-primary" style="font-size: 16px !important;"></i>
+                                <i class="fa-regular fa-hospital-alt me-1 text-primary" style="font-size: 25px !important;"></i>
                                 Hospitals
                             </h4>
                         </div>

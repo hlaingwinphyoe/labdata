@@ -96,9 +96,10 @@
                             <tr>
                                 <th>Department</th>
                                 <th class="text-nowrap">Test Type</th>
-                                @if(auth()->user()->role == 0)
+{{--                                // custom blade directive--}}
+                                @admin
                                 <th>User</th>
-                                @endif
+                                @endadmin
                                 <th>Control</th>
                                 <th>Date</th>
                                 <th>Result</th>
@@ -110,9 +111,9 @@
                                 <tr class="align-middle">
                                     <td>{{ $testTypeValue->department->name }}</td>
                                     <td>{{ $testTypeValue->testType->name }}</td>
-                                    @if(auth()->user()->role == 0)
+                                    @admin
                                     <td>{{ $testTypeValue->user->name }}</td>
-                                    @endif
+                                    @endadmin
                                     <td>
                                         <form action="{{ route('test_value.destroy',$testTypeValue->id) }}" id="delForm{{ $testTypeValue->id }}" method="post">
                                             @csrf

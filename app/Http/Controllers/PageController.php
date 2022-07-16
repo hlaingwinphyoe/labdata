@@ -9,6 +9,7 @@ use App\Models\TestTypeValue;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Maatwebsite\Excel\Facades\Excel;
@@ -22,14 +23,13 @@ class PageController extends Controller
 //        SELECT test_types.name,SUM(test_type_values.amount) as amount FROM test_types LEFT JOIN test_type_values on test_type_values.test_type_id = test_types.id GROUP BY test_types.id
 //        "));
 
+            // if admin all access
+            // if user only their data
+            $recentData = TestTypeValue::when(Auth::user()->role == 1,fn($q)=>$q->where('user_id',Auth::id()))
+                ->latest('id')
+                ->limit(5)
+                ->get();
 
-        if (auth()->user()->role == 0){
-            $recentData = TestTypeValue::latest('id')->limit(5)->get();
-        }else{
-            $recentData = TestTypeValue::where('user_id',auth()->id())->latest('id')->limit(5)->get();
-        }
-
-        if (auth()->user()->role == 0){
             $data = TestTypeValue::when(isset(request()->department),function ($q){
                 $department = request()->department;
                 $q->where('department_id','=',$department);
@@ -40,24 +40,15 @@ class PageController extends Controller
                 $startDate = request()->start_date;
                 $endDate = request()->end_date;
                 $query->whereBetween('created_at', [$startDate, $endDate]);
-            })->select('amount','created_at')->whereBetween('created_at', [Carbon::now()->subMonth(4), Carbon::now()])->get()->groupBy(function ($data){
+            })->when(Auth::user()->role == 1,fn($q)=>$q->where('user_id',Auth::id()))
+                ->select('amount','created_at')
+                ->whereBetween('created_at', [Carbon::now()->subMonth(4), Carbon::now()])
+                ->get()
+                ->groupBy(function ($data){
                 return Carbon::parse($data->created_at)->format('M');
             });
-        }else{
-            $data = TestTypeValue::when(isset(request()->department),function ($q){
-                $department = request()->department;
-                $q->where('department_id','=',$department);
-            })->when(isset(request()->testType),function ($qy){
-                $testType = request()->testType;
-                $qy->where('test_type_id','=',$testType);
-            })->when(isset(request()->start_date),function ($query){
-                $startDate = request()->start_date;
-                $endDate = request()->end_date;
-                $query->whereBetween('created_at', [$startDate, $endDate]);
-            })->where('user_id',auth()->id())->select('amount','created_at')->whereBetween('created_at', [Carbon::now()->subMonth(4), Carbon::now()])->get()->groupBy(function ($data){
-                return Carbon::parse($data->created_at)->format('M');
-            });
-        }
+
+        // for chart
 
         $months = [];
         $monthCount = [];
@@ -74,31 +65,19 @@ class PageController extends Controller
         $departments = Department::all();
         $testTypes = TestType::all();
 
-        if (auth()->user()->role == 0){
-            $testData = TestTypeValue::when(isset(request()->department),function ($q){
-                $department = request()->department;
-                $q->where('department_id','=',$department);
-            })->when(isset(request()->testType),function ($qy){
-                $testType = request()->testType;
-                $qy->where('test_type_id','=',$testType);
-            })->when(isset(request()->start_date),function ($query){
-                $startDate = request()->start_date;
-                $endDate = request()->end_date;
-                $query->whereBetween('created_at', [$startDate, $endDate]);
-            })->latest('id')->paginate(10);
-        }else{
-            $testData = TestTypeValue::when(isset(request()->department),function ($q){
-                $department = request()->department;
-                $q->where('department_id','=',$department);
-            })->when(isset(request()->testType),function ($qy){
-                $testType = request()->testType;
-                $qy->where('test_type_id','=',$testType);
-            })->when(isset(request()->start_date),function ($query){
-                $startDate = request()->start_date;
-                $endDate = request()->end_date;
-                $query->whereBetween('created_at', [$startDate, $endDate]);
-            })->where('user_id',auth()->id())->latest('id')->paginate(10);
-        }
+        $testData = TestTypeValue::when(isset(request()->department),function ($q){
+            $department = request()->department;
+            $q->where('department_id','=',$department);
+        })->when(isset(request()->testType),function ($qy){
+            $testType = request()->testType;
+            $qy->where('test_type_id','=',$testType);
+        })->when(isset(request()->start_date),function ($query){
+            $startDate = request()->start_date;
+            $endDate = request()->end_date;
+            $query->whereBetween('created_at', [$startDate, $endDate]);
+        })->when(Auth::user()->role == 1,fn($q)=>$q->where('user_id',Auth::id()))
+            ->latest('id')
+            ->paginate(10);
 
         $sum = TestTypeValue::when(isset(request()->department),function ($q){
             $department = request()->department;
@@ -111,6 +90,7 @@ class PageController extends Controller
             $endDate = request()->end_date;
             $query->whereBetween('created_at', [$startDate, $endDate]);
         })->sum('amount');
+
         return view('listing',['departments'=>$departments,'testTypes'=>$testTypes,'testTypeValues'=>$testData,'sum'=>$sum]);
     }
 
