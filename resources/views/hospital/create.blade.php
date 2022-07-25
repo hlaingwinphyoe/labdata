@@ -67,7 +67,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse(\App\Models\Hospital::all() as $hospital)
+                            @forelse($hospitals as $hospital)
                                 <tr class="align-middle">
                                     <td class="text-nowrap">{{ $hospital->name }}</td>
                                     <td class="text-nowrap">{{ $hospital->user->name }}</td>

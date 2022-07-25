@@ -19,10 +19,6 @@
                         <i class="fa-solid fa-user-cog me-1"></i>
                         My Profile
                     </a>
-                    <a href="#" class="dropdown-item">
-                        <i class="fa-solid fa-cogs me-1"></i>
-                        Setting
-                    </a>
                     <div class="dropdown-divider"></div>
                     <a  class="dropdown-item" href="{{ route('logout') }}"
                         onclick="event.preventDefault();

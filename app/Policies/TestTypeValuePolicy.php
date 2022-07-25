@@ -30,7 +30,7 @@ class TestTypeValuePolicy
      */
     public function view(User $user, TestTypeValue $testTypeValue)
     {
-        if ($user->role !=0){
+        if ($user->isUser()){
             return $user->id == $testTypeValue->user_id;
         }
         return true;
@@ -56,7 +56,7 @@ class TestTypeValuePolicy
      */
     public function update(User $user, TestTypeValue $testTypeValue)
     {
-        if ($user->role !=0){
+        if ($user->isUser()){
             return $user->id == $testTypeValue->user_id;
         }
         return true;
@@ -71,7 +71,7 @@ class TestTypeValuePolicy
      */
     public function delete(User $user, TestTypeValue $testTypeValue)
     {
-        if ($user->role !=0){
+        if ($user->isUser()){
             return $user->id == $testTypeValue->user_id;
         }
         return true;

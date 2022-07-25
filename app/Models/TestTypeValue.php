@@ -9,8 +9,6 @@ class TestTypeValue extends Model
 {
     use HasFactory;
 
-    protected $with = ['user','department','testType'];
-
     public function department(){
         return $this->belongsTo(Department::class);
     }

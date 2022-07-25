@@ -33,7 +33,10 @@ class HospitalController extends Controller
      */
     public function create()
     {
-        return view('hospital.create');
+        $hospitals = Hospital::with('user')
+            ->orderBy('name','asc')
+            ->get();
+        return view('hospital.create',compact('hospitals'));
     }
 
     /**

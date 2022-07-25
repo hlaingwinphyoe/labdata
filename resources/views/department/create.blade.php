@@ -9,7 +9,7 @@
                     <div class="card-body">
                         <div class="mb-4">
                             <h4 class="text-capitalize fw-bold">
-                                <i class="fa-solid fa-layer-group me-1 text-primary" style="font-size: 16px !important;"></i>
+                                <i class="fa-solid fa-layer-group me-1 text-primary" style="font-size: 25px !important;"></i>
                                 Departments
                             </h4>
                         </div>
@@ -48,7 +48,7 @@
                                             <div class="mb-4">
                                                 <select class="custom-select" name="hospital">
                                                     <option selected disabled>Select Hospital</option>
-                                                    @foreach(\App\Models\Hospital::all() as $hospital)
+                                                    @foreach($hospitals as $hospital)
                                                     <option value="{{ $hospital->id }}">{{ $hospital->name }}</option>
                                                     @endforeach
                                                 </select>
@@ -73,7 +73,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @forelse(\App\Models\Department::all() as $department)
+                            @forelse($departments as $department)
                                 <tr class="align-middle">
                                     <td class="text-nowrap">{{ $department->name }}</td>
                                     <td>{{ $department->hospital->name }}</td>

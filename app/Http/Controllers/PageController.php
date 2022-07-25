@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\DataExport;
 use App\Models\Department;
+use App\Models\Hospital;
 use App\Models\TestType;
 use App\Models\TestTypeValue;
 use App\Models\User;
@@ -25,8 +26,9 @@ class PageController extends Controller
 
             // if admin all access
             // if user only their data
-            $recentData = TestTypeValue::when(Auth::user()->role == 1,fn($q)=>$q->where('user_id',Auth::id()))
+            $recentData = TestTypeValue::when(Auth::user()->isUser(),fn($q)=>$q->where('user_id',Auth::id()))
                 ->latest('id')
+                ->with(['department','testType'])
                 ->limit(5)
                 ->get();
 
@@ -40,9 +42,10 @@ class PageController extends Controller
                 $startDate = request()->start_date;
                 $endDate = request()->end_date;
                 $query->whereBetween('created_at', [$startDate, $endDate]);
-            })->when(Auth::user()->role == 1,fn($q)=>$q->where('user_id',Auth::id()))
+            })->when(Auth::user()->isUser(),fn($q)=>$q->where('user_id',Auth::id()))
                 ->select('amount','created_at')
                 ->whereBetween('created_at', [Carbon::now()->subMonth(4), Carbon::now()])
+                ->with(['testType'])
                 ->get()
                 ->groupBy(function ($data){
                 return Carbon::parse($data->created_at)->format('M');
@@ -75,9 +78,10 @@ class PageController extends Controller
             $startDate = request()->start_date;
             $endDate = request()->end_date;
             $query->whereBetween('created_at', [$startDate, $endDate]);
-        })->when(Auth::user()->role == 1,fn($q)=>$q->where('user_id',Auth::id()))
+        })->when(Auth::user()->isUser(),fn($q)=>$q->where('user_id',Auth::id()))
             ->latest('id')
-            ->paginate(10);
+            ->with(['user','department','testType'])
+            ->paginate(10)->withQueryString();
 
         $sum = TestTypeValue::when(isset(request()->department),function ($q){
             $department = request()->department;
@@ -96,8 +100,9 @@ class PageController extends Controller
 
 
     public function users(){
+        $hospitals = Hospital::all();
         $users = User::where('role','1')->get();
-        return view('users',compact('users'));
+        return view('users',compact('users','hospitals'));
     }
 
     // custom user register
@@ -135,7 +140,7 @@ class PageController extends Controller
     // changing user to admin
     public function makeAdmin(Request $request){
         $currentUser = User::findOrFail($request->id);
-        if ($currentUser->role == 1){
+        if ($currentUser->isUser()){
             $currentUser->role = '0';
             $currentUser->update();
         }

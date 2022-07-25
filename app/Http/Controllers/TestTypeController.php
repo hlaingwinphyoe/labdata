@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Department;
 use App\Models\TestType;
 use App\Http\Requests\StoreTestTypeRequest;
 use App\Http\Requests\UpdateTestTypeRequest;
@@ -27,10 +28,11 @@ class TestTypeController extends Controller
      */
     public function create()
     {
-        $test_types = TestType::when(Auth::user()->role == 1,fn($q)=>$q->where('user_id',Auth::id()))
+        $departments = Department::all();
+        $test_types = TestType::with(['user','department'])->when(Auth::user()->isUser(),fn($q)=>$q->where('user_id',Auth::id()))
             ->orderBy('name','asc')
             ->paginate(10);
-        return view('test_type.create',compact('test_types'));
+        return view('test_type.create',compact('test_types','departments'));
     }
 
     /**

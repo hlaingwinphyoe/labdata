@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Department;
 use App\Http\Requests\StoreDepartmentRequest;
 use App\Http\Requests\UpdateDepartmentRequest;
+use App\Models\Hospital;
 use Illuminate\Support\Facades\Auth;
 
 class DepartmentController extends Controller
@@ -31,7 +32,11 @@ class DepartmentController extends Controller
      */
     public function create()
     {
-        return view('department.create');
+        $hospitals = Hospital::all();
+        $departments = Department::with(['hospital','user'])
+            ->orderBy('name','asc')
+            ->get();
+        return view('department.create',compact('hospitals','departments'));
     }
 
     /**
@@ -58,7 +63,7 @@ class DepartmentController extends Controller
      */
     public function show(Department $department)
     {
-        return $department;
+        //
     }
 
     /**

@@ -9,7 +9,7 @@ class TestType extends Model
 {
     use HasFactory;
 
-    protected $with = ['user','department'];
+//    protected $with = ['user','department'];
 
     public function user(){
         return $this->belongsTo(User::class);

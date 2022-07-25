@@ -120,7 +120,7 @@
                                                                 <div class="mb-4">
                                                                     <select class="custom-select" name="department">
                                                                         <option selected disabled>Select Department</option>
-                                                                        @foreach(\App\Models\Department::all() as $department)
+                                                                        @foreach($departments as $department)
                                                                             <option value="{{ $department->id }}" {{ $department->id == $test_type->department_id ? 'selected':'' }}>{{ $department->name }}</option>
                                                                         @endforeach
                                                                     </select>

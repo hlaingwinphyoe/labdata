@@ -9,7 +9,7 @@
                     <div class="card-body">
                         <div class="mb-4">
                             <h4 class="text-capitalize fw-bold">
-                                <i class="fa-solid fa-users me-1 text-primary" style="font-size: 16px !important;"></i>
+                                <i class="fa-solid fa-users me-1 text-primary" style="font-size: 25px !important;"></i>
                                 Users
                             </h4>
                         </div>
@@ -57,7 +57,7 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label class="form-label">Choose Hospitals</label><br>
-                                                @forelse(\App\Models\Hospital::all() as $hospital)
+                                                @forelse($hospitals as $hospital)
                                                     <div class="form-check">
                                                         <input type="checkbox" class="form-check-input" value="{{ $hospital->id }}" id="{{ $hospital->name }}">
                                                         <label for="{{ $hospital->name }}" class="form-check-label">{{ $hospital->name }}</label>
