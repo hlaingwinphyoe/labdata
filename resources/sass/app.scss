@@ -61,6 +61,8 @@ $light : #c3c6c8;
 //    //overflow-x: hidden;
 //}
 
+
+
 // swal2 customization
 .swal2-styled.swal2-confirm{
     background-color: var(--bs-primary) !important;
@@ -106,6 +108,129 @@ $light : #c3c6c8;
     border-color: var(--bs-primary) !important;
     color: #5b987b !important;
 }
+
+
+// select2 theme customization
+.select2{
+    width: 100% !important;
+}
+
+.select2-container{
+    z-index: 2000;
+}
+
+.select2-search--dropdown{
+    display: none;
+}
+
+.select2-container--default .select2-selection--single{
+    height: 35px !important;
+    background-color: transparent !important;
+    border: none !important;
+    border-bottom: 1px solid #9e9e9e !important;
+    border-radius: 0!important;
+    outline: none !important;
+}
+
+.select2-container--default .select2-selection--single:focus{
+    border: none !important;
+    outline: none;
+    border-bottom: 2px solid #2d6a4f !important;
+    box-shadow: none !important;
+}
+
+.select2-selection__rendered{
+    line-height: 31px !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow{
+    height: 35px !important;
+    right: 5px !important;
+}
+
+
+.select2-container.select2-container--focus .select2-selection--multiple {
+    background-color: #fefefe;
+    border-color: #979da6;
+    color: #444
+}
+
+.select2-container.select2-container--open .select2-selection--single {
+    background-color: #fefefe;
+    border-color: #979da6;
+    color: #444
+}
+
+.selectric {
+    background-color: #fefefe;
+    border-color: #979da6;
+    color: #444
+}
+
+.selectric:hover {
+    background-color: #fefefe;
+    border-color: #979da6;
+    color: #444
+}
+
+.select2-container--default .select2-results__option[aria-selected="true"] {
+    background-color: #2d6a4f
+}
+
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+    background-color: #2d6a4f
+}
+
+.select2-container--default .select2-search--dropdown .select2-search__field {
+    background-color: #fefefe;
+    color: #444
+}
+
+.select2-container--default .select2-search--inline .select2-search__field {
+    color: #444
+}
+
+.select2-dropdown {
+    background-color: #fefefe;
+    color: #444
+}
+
+.bootstrap-tagsinput {
+    background-color: #fefefe;
+    border-color: #979da6;
+    color: #444
+}
+
+.selectgroup-button {
+    background-color: #fefefe
+}
+
+.custom-switch-indicator {
+    background: #fefefe
+}
+
+.selectric-items {
+    background-color: #fefefe;
+    box-shadow: 0 4px 25px 0 rgba(0, 0, 0, 0.3);
+    color: #444
+}
+
+.selectric-items li {
+    color: #444
+}
+
+.selectric-items li.selected {
+    background-color: #2d6a4f
+}
+
+.selectric-items li.highlighted {
+    background-color: #2d6a4f
+}
+
+.selectric-items li:hover {
+    background-color: #2d6a4f
+}
+
 
 .card{
     border: 0 !important;
@@ -200,7 +325,11 @@ $light : #c3c6c8;
     overflow-y: scroll;
     background: var(--bs-secondary);
     transition: 0.5s;
-    z-index: 2001;
+    z-index: 1000;
+}
+
+.sticky-top{
+    z-index: 1001 !important;
 }
 
 .content {
@@ -210,9 +339,9 @@ $light : #c3c6c8;
     transition: 0.5s;
 }
 
-.sticky-top{
-    z-index: 2002 !important;
-}
+//.sticky-top{
+//    z-index: 2002 !important;
+//}
 
 @media (min-width: 992px) {
     .sidebar {
@@ -236,6 +365,25 @@ $light : #c3c6c8;
 @media (max-width: 991.98px) {
     .sidebar {
         margin-left: -250px;
+    }
+
+    .sidebar.open {
+        margin-left: 0;
+    }
+
+    .content {
+        width: 100%;
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 780px) {
+    .sidebar {
+        margin-left: -250px;
+        z-index: 2003 !important;
+    }
+    .sticky-top{
+        z-index: 2004 !important;
     }
 
     .sidebar.open {
@@ -511,61 +659,6 @@ $light : #c3c6c8;
 .box-content{
     padding: 30px 20px 20px 20px;
 }
-
-
-// select2 theme customization
-.select2{
-    width: 100% !important;
-}
-
-.select2-container{
-    z-index: 2000;
-}
-
-.select2-search--dropdown{
-    display: none;
-}
-
-.select2-container--default .select2-selection--single{
-    height: 35px !important;
-    background-color: transparent !important;
-    border: none !important;
-    border-bottom: 1px solid #9e9e9e !important;
-    border-radius: 0!important;
-    outline: none !important;
-}
-
-.select2-container--default .select2-selection--single:focus{
-    border: none !important;
-    outline: none;
-    border-bottom: 2px solid var(--bs-primary) !important;
-    box-shadow: none !important;
-}
-
-.select2-selection__rendered{
-    line-height: 31px !important;
-}
-
-.select2-container--default .select2-selection--single .select2-selection__arrow{
-    height: 35px !important;
-    right: 5px !important;
-}
-
-// calendar
-
-//.calendar{
-//    color: #fff;
-//    margin: 10px auto;
-//    background: #04b6e2;
-//    padding: 60px 40px 80px 40px;
-//    width: 95%;
-//    max-width: 600px;
-//    height: 325px;
-//    border-radius: 5px;
-//    box-shadow: 0px 2px 6px rgba(2,2,2,0.2);
-//    position: relative;
-//}
-
 
 .calendar__title{
     text-align: center;

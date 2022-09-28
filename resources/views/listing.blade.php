@@ -180,7 +180,7 @@
                                 @endcan
                             @empty
                                 <tr>
-                                    <td colspan="5" class="text-center">There's no result!</td>
+                                    <td colspan="6" class="text-center">There's no result!</td>
                                 </tr>
                             @endforelse
                             @if(request()->department || request()->testType || request()->start_date || request()->end_date)
