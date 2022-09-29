@@ -7,7 +7,7 @@
         <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
             <div class="bg-secondary shadow rounded p-4 p-sm-5 my-4 mx-3">
                 <div class="d-flex align-items-center justify-content-between mb-3">
-                    <h3 class="text-primary">550MCH Lab</h3>
+                    <h3 class="text-primary">LMS</h3>
                     <h5>Sign In</h5>
                 </div>
                 <form action="{{ route('login') }}" method="post">

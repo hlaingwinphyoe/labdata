@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title') Test Types | 550MCH Lab @endsection
+@section('title') Test Types @endsection
 
 @section('content')
     <div class="container">

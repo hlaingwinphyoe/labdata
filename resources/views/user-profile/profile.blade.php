@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section("title") Profile : 550MCH Lab @endsection
+@section("title") Profile @endsection
 
 @section('content')
     <div class="container">

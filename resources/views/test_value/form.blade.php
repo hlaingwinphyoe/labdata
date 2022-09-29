@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title') Data Entry | 550MCH Lab @endsection
+@section('title') Data Entry @endsection
 @section('content')
     <div class="container">
         <div class="row my-3">

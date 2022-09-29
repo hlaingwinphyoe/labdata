@@ -1,7 +1,7 @@
 <div class="sidebar pe-4 pb-3 shadow">
     <nav class="navbar bg-secondary navbar-dark">
-        <a href="{{ route('index') }}" class="navbar-brand mx-5 mb-3">
-            <h4 class="text-primary">550MCH Lab</h4>
+        <a href="{{ route('index') }}" class="navbar-brand" style="margin: 5px 100px">
+            <h4 class="text-primary">LMS</h4>
         </a>
         <div class="d-flex align-items-center ms-4 mb-3">
             <div class="position-relative">

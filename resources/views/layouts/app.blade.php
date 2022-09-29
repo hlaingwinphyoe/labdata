@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>@yield('title',"550MCH Lab Data")</title>
+    <title>@yield('title',"Lab Data")</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <meta name="description" content="Laboratory workload data per day."/>

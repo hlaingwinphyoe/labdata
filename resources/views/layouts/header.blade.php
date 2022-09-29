@@ -4,7 +4,7 @@
             <i class="fa-solid fa-bars text-secondary"></i>
         </a>
         <div class="text-center">
-            <h5 class="text-white mb-0 text-center">Clinical Laboratory Data (550 MCH)</h5>
+            <h5 class="text-white mb-0 text-center">Laboratory Management System</h5>
         </div>
 
         <div class="navbar-nav align-items-center">

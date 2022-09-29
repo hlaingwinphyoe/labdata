@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title') Tests | 550MCH Lab @endsection
+@section('title') Tests @endsection
 @section('content')
     <div class="container">
         <div class="row">

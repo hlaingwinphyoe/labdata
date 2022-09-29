@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title') Users | 550MCH Lab @endsection
+@section('title') Users @endsection
 
 @section('content')
     <div class="container">

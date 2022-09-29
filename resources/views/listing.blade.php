@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-    Dashboard | 550MCH Lab
+    Data Lists
 @endsection
 
 @section('content')
@@ -87,9 +87,11 @@
                                     </div>
                                 </div>
                             </div>
+                            @if($testTypeValues->count() > 0)
                             <div class="mt-2">
                                 <button class="btn btn-primary text-uppercase"><i class="fa-solid fa-file-excel me-2"></i>Export Excel</button>
                             </div>
+                            @endif
                         </form>
                         <table class="table table-responsive mt-2">
                             <thead>

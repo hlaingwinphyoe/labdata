@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-    Dashboard | 550MCH Lab
+    Dashboard
 @endsection
 
 @section('content')
@@ -34,12 +34,12 @@
                                     </div>
                                     <div class="col-6 col-xl-3">
                                         <div class="mb-2">
-                                            <input type="date" class="form-control" name="start_date" value="{{ request()->start_date }}">
+                                            <input type="text" class="form-control" name="start_date" value="{{ request()->start_date }}">
                                         </div>
                                     </div>
                                     <div class="col-6 col-xl-3">
                                         <div class="mb-2">
-                                            <input type="date" class="form-control" name="end_date" value="{{ request()->end_date }}">
+                                            <input type="text" class="form-control" name="end_date" value="{{ request()->end_date }}">
                                         </div>
                                     </div>
                                 </div>
@@ -710,7 +710,6 @@
 
         var calendar = new CalendarApp();
         // console.log(calendar);
-
 
     </script>
 @endpush
